@@ -1,0 +1,29 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+{% block title %}RewardPay accounts{% endblock %}
+{% block body %}
+ <div class="main">
+  <div class="page-title">
+  <h1 class="logo">RewardPay standalone accounts list</h1>
+  <div class="content" style="color: #FFFFFF;display: flex;align-items: center;justify-content: center">
+  {% if accounts %}
+  <ul>
+  {% for account in accounts %}
+    <li><a href="/standalone-account/{{ account.address }}">{{ account.address }}</a> :
+        {% if accounts.balance %}
+        {{ account.balance }} microAlgos
+        {% else %}
+        0 microAlgos
+        {% endif %}
+    </li>
+  {% endfor %}
+  </ul>
+  {% else %}
+  <p>There are no standalone accounts.</p>
+  {% endif %}
+  <br>
+  </div>
+      <div class="link-center" style="text-align: center"><a href="/create-standalone/"><h5>Create RewardPay standalone account</h5></a></div>
+  </div>
+ </div>
+{% endblock %}

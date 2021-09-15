@@ -1,0 +1,20 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+{% block title %}Create asset{% endblock %}
+{% block body %}
+ <div class="main">
+  <div class="page-title">
+  <h1 class="logo">Create asset</h1>
+  <div class="asset-form" style="color: #FFFFFF;display: flex;align-items: center;justify-content: center">
+  <form action="/create-asset/" method="post">
+    {% csrf_token %}
+    <table>{{ form.as_table }}</table>
+    <input type="submit" name="submit" value="Submit">
+    <br><br><hr>
+    <p><span style="color:red">WARNING: don't do this in production</span></p>
+    <input type="submit" name="retrieve_passphrase" value="Retrieve passphrase">
+  </form>
+  </div>
+  </div>
+ </div>
+{% endblock %}

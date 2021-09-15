@@ -1,0 +1,19 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+{% block title %}Create standalone account{% endblock %}
+{% block body %}
+ <div class="main">
+  <div class="page-title">
+  <h1 class="logo">New standalone account</h1>
+  <div class="content" style="color: #FFFFFF;text-align: center">
+  {% if account %}
+  <p>Your standalone account has been created. Please write down the following data:</p>
+  <p><strong>Address</strong>: {{ account.0 }}</p>
+  <p><strong>Passphrase</strong>: {{ account.1 }}</p>
+  <br>
+      <a href="/initial-funds/{{ account.0 }}/"><h5>Add initial funds</h5></a>
+      </div>
+      </div>
+      </div>
+  {% endif %}
+{% endblock %}

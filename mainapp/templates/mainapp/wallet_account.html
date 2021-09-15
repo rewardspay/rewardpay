@@ -1,0 +1,4 @@
+{% extends 'mainapp/base_account.html' %}
+{% load static %}
+{% block prefix %}Wallet{% endblock prefix %}
+{% block start %}<p>Wallet: {{ wallet.name }} (ID: {{ wallet.wallet_id }})</p>{% endblock start %}
