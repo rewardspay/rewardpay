@@ -2,18 +2,27 @@
 {% load static %}
 {% block title %}Create standalone account{% endblock %}
 {% block body %}
- <div class="main">
-  <div class="page-title">
-  <h1 class="logo">New standalone account</h1>
-  <div class="content" style="color: #FFFFFF;text-align: center">
-  {% if account %}
-  <p>Your standalone account has been created. Please write down the following data:</p>
-  <p><strong>Address</strong>: {{ account.0 }}</p>
-  <p><strong>Passphrase</strong>: {{ account.1 }}</p>
-  <br>
-      <a href="/initial-funds/{{ account.0 }}/"><h5>Add initial funds</h5></a>
-      </div>
-      </div>
-      </div>
-  {% endif %}
+
+		<!-- Four -->
+			<section id="four" class="main style2 special">
+				<div class="container">
+					<header class="major">
+						<h2>New standalone account</h2>
+					</header>
+                    {% if account %}
+					<p>Your standalone account has been created. Please write down the following data:</p>
+                    <p><strong>Address</strong>: {{ account.0 }}</p>
+                    <p><strong>Passphrase</strong>: {{ account.1 }}</p>
+                    {% endif %}
+					<ul class="actions special">
+						<li><a href="/" class="button wide primary">Back to Home</a></li>
+						<li><a href="#" class="button wide">Add initial funds</a></li>
+					</ul>
+				</div>
+			</section>
+
+
+
+
+
 {% endblock %}
