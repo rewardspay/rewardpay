@@ -31,9 +31,9 @@ except KeyError:
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['3.26.117.166']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
