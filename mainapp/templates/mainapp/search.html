@@ -2,10 +2,9 @@
 {% load static %}
 {% block title %}Search transactions{% endblock %}
 {% block body %}
- <div class="main">
-  <div class="page-title">
-  <h1 class="logo">Search transactions</h1>
-    <div class="search-form" style="color: #FFFFFF;display: flex;align-items: center;justify-content: center">
+
+  <h1>Search transactions</h1>
+
   <form action="/search/" method="post">
     {% csrf_token %}
     <table>{{ form.as_table }}</table>
@@ -16,7 +15,5 @@
     {{ transaction }}
     <br><br>
   {% endfor %}
-    </div>
-  </div>
- </div>
+
 {% endblock %}
