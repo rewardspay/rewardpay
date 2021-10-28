@@ -177,6 +177,7 @@ def register(request):
             Customer.objects.create(
                 user=user,
                 name=user.username,
+                email=user.email,
                 algo_private_key=h_addr[0],
                 algo_addr=h_addr[1],
             )
