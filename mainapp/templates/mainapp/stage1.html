@@ -1,0 +1,72 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+{% block title %}Stage 1{% endblock %}
+
+<body class="is-preload">
+{% block body %}
+		<!-- Header -->
+			<section id="header">
+				<div class="inner">
+					<span class="icon solid major fa-cloud"></span>
+					<h1>Hi, We are <strong>RewardPay</strong>, a blockchain and AI <br />
+					powered rental rewards <a href="#">app</a>.</h1>
+					<p>Apply data and AI to react rapidly to <br />
+					change and opportunity.</p>
+					<ul class="actions special">
+						<li><a href="#one" class="button scrolly">Discover</a></li>
+					</ul>
+				</div>
+			</section>
+
+		<!-- One -->
+			<section id="one" class="main style1">
+				<div class="container">
+					<div class="row gtr-150">
+						<div class="col-6 col-12-medium">
+							<header class="major">
+								<h2>Latest network status<br />
+								 from the Algorand blockchain</h2>
+							</header>
+							<p><a href="/std-account/">Click here to see the current account list</a></p>
+                                <!-- ipfs file upload -->
+                                <div class="ipfs-form">
+                                    <h3>Upload files to IPFS</h3>
+                                    <input type="file" id="upload">
+                                    <div id="link"></div>
+                                </div>
+
+						</div>
+						<div class="col-6 col-12-medium imp-medium">
+							<span class="image fit">{{ Network|cut:"\n"|cut:"{"|cut:"}" |safe }}</span>
+						</div>
+					</div>
+				</div>
+			</section>
+
+
+    <!-- JS for ipfs file upload -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+    <script src="https://unpkg.com/ipfs-http-client@30.1.3/dist/index.js"></script>
+    <script src="https://bundle.run/buffer@5.2.1"></script>
+    <script>
+        const ipfs = window.IpfsHttpClient('ipfs.infura.io', '5001', { protocol: 'https' });
+
+        $("#upload").on("change", function() {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+
+                const magic_array_buffer_converted_to_buffer = buffer.Buffer(reader.result);
+                ipfs.add(magic_array_buffer_converted_to_buffer, (err, result) => {
+                    console.log(err, result);
+
+              let ipfsLink = "<a href='https://gateway.ipfs.io/ipfs/" + result[0].hash + "'>gateway.ipfs.io/ipfs/" + result[0].hash + "</a>";
+              document.getElementById("link").innerHTML = ipfsLink;
+
+                })
+            }
+            reader.readAsArrayBuffer(this.files[0]);
+        })
+    </script>
+
+    </body>
+{% endblock %}

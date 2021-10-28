@@ -1,0 +1,54 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+{% block title %}Account page{% endblock %}
+{% block body %}
+
+ <div class="main">
+  <div class="page-title">
+  <h1 class="logo">{% block prefix %}Standalone{% endblock prefix %} account page</h1>
+  <div class="content" style="color: #FFFFFF;text-align: center">
+  {% block start %}{% endblock start %}
+  <p>Address: {{ account.address }}</p>
+  <p>Created: {{ account.created }}</p>
+  <p>Balance: {{ account.balance }} microAlgos</p>
+  <br>
+  {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+      <a href="/transfer-funds/{{ account.address }}/"><h5>Transfer funds</h5></a>
+  <h2>Transactions</h2>
+
+  <div class="txn-tble" style="display: flex;align-items: center;justify-content: center">
+
+  <table class="full-width">
+  <tr>
+    <th>ID</th>
+    <th>Round/Type</th>
+    <th>Sender/Receiver</th>
+    <th>Amount</th>
+    <th>Note</th>
+  </tr>
+  {% for transaction in account.transactions %}
+  <tr>
+    <td rowspan="2">{{ transaction.id }}</td>
+    <td>{{ transaction.round }}</td>
+    <td>{{ transaction.sender }}</td>
+    <td rowspan="2">{{ transaction.amount }}</td>
+    <td rowspan="2">{{ transaction.note }}</td>
+  </tr>
+  <tr>
+    <td>{{ transaction.type }}</td>
+    <td>{{ transaction.receiver }}</td>
+  </tr>
+  {% endfor %}
+</table>
+  </div>
+  </div>
+  </div>
+ </div>
+{% endblock body %}

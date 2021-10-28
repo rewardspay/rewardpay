@@ -1,0 +1,63 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+{% block title %}User Profile{% endblock %}
+
+
+{% block extrahead %}
+<link rel="stylesheet" href="{% static 'mainapp/css/user.css' %}" media="screen">
+
+{% endblock %}
+
+{% block body %}
+<body class="u-body">
+
+<section class="u-align-center u-clearfix u-section-1" id="carousel_2fcb">
+      <div class="u-clearfix u-sheet u-valign-middle-lg u-valign-middle-md u-valign-middle-sm u-valign-middle-xs u-sheet-1">
+        <div class="u-align-center u-container-style u-expanded-width-sm u-expanded-width-xs u-group u-group-1">
+          <div class="u-container-layout u-valign-middle u-container-layout-1">
+            <h5 class="u-text u-text-default u-text-1">User Profile</h5>
+            <h3 class="u-custom-font u-font-ubuntu u-text u-text-default u-text-2"></h3>
+            <div class="u-image u-image-circle u-image-1" alt="" data-image-width="800" data-image-height="994">
+                {% if request.user.customer.profile_pic %}
+                <img src="{{user.customer.profile_pic.url}}" alt="" class="u-image u-image-default u-image-1"
+                     data-image-width="250" data-image-height="250">
+                {% endif %}
+            </div>
+            <p class="u-text u-text-3">
+                <span style="font-weight: 700;">User Name: </span>
+                <br>{{request.user.customer.name}}
+                <span style="font-weight: 700;">
+                                <br>First Name:
+                </span>
+                <br>{{request.user.first_name}}
+                <span style="font-weight: 700;">
+                                <br>Last Name:
+                </span>
+                {{request.user.last_name}}
+                <span style="font-weight: 700;">Email:&nbsp;</span>
+                <br>{{user.customer.email}}&nbsp;<span style="font-weight: 700;">
+                                <br>Algorand Address:
+                                </span>
+                <br>{{user.customer.algo_addr}}
+                <span style="font-weight: 700;">
+                                <br>Algorand Private Key:
+                                </span>
+                <br>{{user.customer.algo_private_key}}
+                <span style="font-weight: 700;">
+                                <br>Home Address:
+                                </span>
+                <br>{{user.customer.home_address}}
+                                <span style="font-weight: 700;">
+                                <br>Drivers License Number:
+                                </span>
+                <br>{{user.customer.driver_license}}
+            </p>
+            <a href="/account/" class="u-active-black u-border-none u-btn u-btn-round u-button-style u-hover-black u-palette-3-base u-radius-50 u-text-body-alt-color u-btn-2">Edit Profile</a>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+</body>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+
+{% block title %}Assets{% endblock %}
+{% block body %}
+ <div class="main">
+  <div class="page-title">
+  <h1 class="logo">Assets list</h1>
+  <div class="content">
+  {% if assets %}
+  <table class="full-width">
+  <tr>
+    <th>ID/Frozen</th>
+    <th>Name/Unit</th>
+    <th>Total/Decimals</th>
+    <th>Url/Metadata</th>
+    <th>Creator</th>
+    <th>Manager/Reserve</th>
+    <th>Freeze/Clawback</th>
+  </tr>
+  {% for asset in assets %}
+  <tr>
+    <td>{{ asset.asset_id }}</td>
+    <td>{{ asset.name }}</td>
+    <td>{{ asset.total }}</td>
+    <td>{{ asset.url }}</td>
+    <td rowspan="2">{{ asset.creator }}</td>
+    <td>{{ asset.manager }}</td>
+    <td>{{ asset.freeze }}</td>
+  </tr>
+  <tr>
+    <td>{{ asset.frozen }}</td>
+    <td>{{ asset.unit }}</td>
+    <td>{{ asset.decimals }}</td>
+    <td>{{ asset.metadata }}</td>
+    <td>{{ asset.reserve }}</td>
+    <td>{{ asset.clawback }}</td>
+  </tr>
+  {% endfor %}
+  </table>
+  {% else %}
+  <p style="text-align: center;color: #FFFFFF">There are no assets.</p>
+  {% endif %}
+  <br>
+      <div class="link-center" style="text-align: center"><a href="/create-asset/"><h5>Create asset</h5></a></div>
+  </div>
+  </div>
+ </div>
+{% endblock %}

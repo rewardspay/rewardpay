@@ -1,0 +1,111 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+{% block title %}Login{% endblock %}
+
+{% block extrahead %}
+    <link rel="stylesheet" href="{% static 'mainapp/css/login.css' %}" media="screen">
+
+{% endblock %}
+
+  <body class="u-body">
+ {% block body %}
+    <section class="u-align-center u-clearfix u-grey-10 u-section-1" id="sec-65c9">
+      <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
+        <div class="u-align-center u-container-style u-group u-radius-50 u-shape-round u-white u-group-1">
+          <div class="u-container-layout u-valign-middle u-container-layout-1">
+            <h3 class="u-text u-text-default u-text-1">Sign In</h3>
+            <div class="u-expanded-width u-form u-login-control u-form-1">
+              <form action="#" method="POST" class="u-clearfix u-form-custom-backend u-form-spacing-35 u-form-vertical u-inner-form" id="signin-form" source="custom" name="form-2" style="padding: 10px;">
+                {% csrf_token %}
+                <div class="u-form-group u-form-name">
+                  <label for="signin-email" class="u-form-control-hidden u-label"></label>
+                  <input type="text" placeholder="Enter your Username" id="signin-email" name="username" class="u-grey-5 u-input u-input-rectangle" required="">
+                </div>
+                <div class="u-form-group u-form-password">
+                  <label for="signin-pass" class="u-form-control-hidden u-label"></label>
+                  <input type="password" placeholder="Enter your Password" id="signin-pass" name="password" class="u-grey-5 u-input u-input-rectangle" required="">
+                </div>
+                <!--
+                <div class="u-form-checkbox u-form-group">
+                  <input type="checkbox" id="checkbox-708d" name="remember" value="On">
+                  <label for="checkbox-708d" class="u-label">Remember me</label>
+                </div>
+                -->
+                <div class="u-align-center u-form-group u-form-submit">
+                  <a href="#" class="u-btn u-btn-round u-btn-submit u-button-style u-radius-17 u-btn-1" id="quickstart-sign-in">Login</a>
+                  <input type="submit" value="submit" class="u-form-control-hidden">
+                </div>
+                <input type="hidden" value="" name="recaptchaResponse">
+              </form>
+                {% for message in messages %}
+				<p id="messages" style="background-color: grey; color: #FFFFFF; padding: 10px;margin-top: 10px;">{{message}}</p>
+				{% endfor %}
+            </div>
+            <a href="/Register/" class="u-border-1 u-border-active-palette-2-base u-border-hover-palette-1-base u-btn u-button-style u-login-control u-login-forgot-password u-none u-text-palette-1-base u-btn-2" id="Signup-link">Don't have an account? Sign Up</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  	<!-- reference to Google Firebase -->
+    <!--
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-app.js"
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-analytics.js"
+      import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-auth.js"
+      import { getFirestore } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-firestore.js"
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      const firebaseConfig = {
+        apiKey: "AIzaSyCenqkSH6IKOcxFJQ4esPI4QXWXhSRwBVA",
+        authDomain: "rewardspay-7cd9d.firebaseapp.com",
+        projectId: "rewardspay-7cd9d",
+        storageBucket: "rewardspay-7cd9d.appspot.com",
+        messagingSenderId: "361973704217",
+        appId: "1:361973704217:web:f095d33d3a1cd8dfb46c88",
+        measurementId: "G-9TXC7EWVZK"
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+      const db = getFirestore(app);
+
+      // Sign in existing users
+      const auth = getAuth(app);
+
+      const signinForm = document.querySelector('#signin-form');
+      signinForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          // get user info
+          const email = signinForm['signin-email'].value;
+          const passwd = signinForm['signin-pass'].value;
+
+
+      signInWithEmailAndPassword(auth, email, passwd)
+         .then((userCredential) => {
+         // Signed in
+         const user = userCredential.user;
+         console.log(user);
+         const section = document.querySelector('#signin-form');
+         signinForm.reset;
+         let html = '';
+         const txt = `
+          <div style="text-align: center"><h5>Logged in.</h5>
+          <h5><a href="/">Back to Home</a></h5></div>
+         `;
+         html += txt;
+         section.innerHTML = html;
+
+         // ...
+         })
+         .catch((error) => {
+           const errorCode = error.code;
+           const errorMessage = error.message;
+         });
+       });
+    </script>
+    -->
+  </body>
+{% endblock %}

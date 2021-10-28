@@ -1,0 +1,28 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+{% block title %}Create standalone account{% endblock %}
+{% block body %}
+
+		<!-- Four -->
+			<section id="four" class="main style2 special">
+				<div class="container">
+					<header class="major">
+						<h2>New standalone account</h2>
+					</header>
+                    {% if account %}
+					<p>Your standalone account has been created. Please write down the following data:</p>
+                    <p><strong>Address</strong>: {{ account.0 }}</p>
+                    <p><strong>Passphrase</strong>: {{ account.1 }}</p>
+                    {% endif %}
+					<ul class="actions special">
+						<li><a href="/" class="button wide primary">Back to Home</a></li>
+						<li><a href="#" class="button wide">Add initial funds</a></li>
+					</ul>
+				</div>
+			</section>
+
+
+
+
+
+{% endblock %}

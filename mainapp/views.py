@@ -1,14 +1,23 @@
 from django.contrib import messages
 from django.http import Http404
 from django.shortcuts import redirect, render
-import json
+# import json
 from json2html import *
+
+from django.http import HttpResponse
+from django.forms import inlineformset_factory
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import Group
 
 from .forms import (
     CreateAssetForm,
     CreateWalletForm,
     SearchTransactionsForm,
     TransferFundsForm,
+    CreateUserForm,
+    CustomerForm,
 )
 from .helpers import (
     INITIAL_FUNDS,
@@ -22,8 +31,9 @@ from .helpers import (
     search_transactions,
     network_status,
 )
-from .models import Account, Asset, Wallet, WalletAccount, Netwk_status
+from .models import Account, Asset, Wallet, WalletAccount, Netwk_status, Customer
 
+from .decorators import unauthenticated_user, allowed_users, admin_only
 
 def assets(request):
     """Display all the created assets."""
@@ -121,15 +131,95 @@ def create_wallet_account(request, wallet_id):
     messages.add_message(request, messages.SUCCESS, message)
     return redirect("wallet", wallet_id)
 
-def index(request):
+def stage1(request):
     netwk_status = Netwk_status()
     #netwk_status.stats = json.dumps(network_status(), sort_keys=True, indent=4,)
     netwk_status.stats = json2html.convert(json=network_status())
     context = {
         'Latest network status': netwk_status.stats
     }
-    return render(request, "mainapp/index.html", {'Network': context})
+    return render(request, "mainapp/stage1.html", {'Network': context})
 
+def index(request):
+    return render(request, "mainapp/index.html", {})
+
+@unauthenticated_user
+def loginUser(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect('index')
+        else:
+            messages.info(request, 'Username OR password is incorrect')
+
+    context = {}
+    return render(request, "mainapp/Login.html", context)
+
+@unauthenticated_user
+def register(request):
+    form = CreateUserForm()
+    if request.method == 'POST':
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            username = form.cleaned_data.get('username')
+
+            h_addr = add_standalone_account()
+
+            group = Group.objects.get(name='customer')
+            user.groups.add(group)
+
+            Customer.objects.create(
+                user=user,
+                name=user.username,
+                algo_private_key=h_addr[0],
+                algo_addr=h_addr[1],
+            )
+
+            messages.success(request, 'Account was created for ' + username)
+
+            return redirect('login')
+
+    context = {'form': form}
+    return render(request, "mainapp/Register.html", context)
+
+def logoutUser(request):
+    logout(request)
+    return redirect('login')
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['customer'])
+def userPage(request):
+# content to show on user page
+    #customer = request.user.customer.get_profile()
+    #context = {'customer':customer}
+
+    return render(request, 'mainapp/user.html', {})
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['customer'])
+def accountSettings(request):
+    customer = request.user.customer
+    form = CustomerForm(instance=customer)
+
+    if request.method == 'POST':
+        form = CustomerForm(request.POST, request.FILES,instance=customer)
+        if form.is_valid():
+            form.save()
+
+    context = {'form':form}
+    return render(request, 'mainapp/account-settings.html', context)
+
+@login_required(login_url='login')
+def stage1(request):
+    return render(request, "mainapp/stage1.html", {})
+
+@login_required(login_url='login')
 def std_account(request):
     """Display all the created standalone accounts."""
 

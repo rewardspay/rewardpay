@@ -4,7 +4,11 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.forms.fields import CharField
 
-from .models import Asset
+from django.forms import ModelForm
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+
+from .models import Asset, Customer
 
 
 class TransferFundsForm(forms.Form):
@@ -128,3 +132,14 @@ class SearchTransactionsForm(forms.Form):
             raise ValidationError("You must fill at least one field!")
 
         return cleaned_data
+
+class CreateUserForm(UserCreationForm):
+	class Meta:
+		model = User
+		fields = ['username', 'email', 'password1', 'password2']
+
+class CustomerForm(ModelForm):
+	class Meta:
+		model = Customer
+		fields = '__all__'
+		exclude = ['user','algo_addr']

@@ -29,4 +29,10 @@ urlpatterns = [
     path("assets/", views.assets, name="assets"),
     path("create-asset/", views.create_asset, name="create-asset"),
     path("search/", views.search, name="search"),
+    path("Login/", views.loginUser, name="login"),
+    path("Logout/", views.logoutUser, name="logout"),
+    path("Register/", views.register, name="register"),
+    path("user/", views.userPage, name="user-page"),
+    path("stage1/", views.stage1, name="stage1"),
+    path("account/", views.accountSettings, name="account"),
 ]

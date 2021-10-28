@@ -1,0 +1,47 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+{% block title %}Profile Settings{% endblock %}
+
+{% block extrahead %}
+<link rel="stylesheet" href="{% static 'mainapp/css/account-settings.css' %}" media="screen">
+
+{% endblock %}
+
+<body class="u-body">
+{% block body %}
+
+<section class="u-clearfix u-section-1" id="carousel_e7a8">
+    <div class="u-clearfix u-sheet u-sheet-1">
+        <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
+            <div class="u-gutter-0 u-layout">
+                <div class="u-layout-row">
+                    <div class="u-container-style u-layout-cell u-shape-rectangle u-size-18 u-layout-cell-1">
+                        <div class="u-border-20 u-border-palette-3-base u-container-layout u-valign-middle-lg u-valign-middle-md u-valign-middle-xl u-container-layout-1">
+                            {% if request.user.customer.profile_pic %}
+                            <div><img class="profile-pic" src="{{request.user.customer.profile_pic.url}}" style="max-width: 250px; max-height: 250px;margin: 0 auto;border-radius: 50%;"></div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="u-align-justify u-container-style u-layout-cell u-size-42 u-layout-cell-2">
+                        <div class="u-container-layout u-valign-middle-lg u-valign-middle-xl u-container-layout-2">
+                            <h4 class="u-custom-font u-font-montserrat u-text u-text-1">User Profile</h4>
+                            <form method="POST" action="" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                {{form.as_p}}
+
+                                <input class="btn btn-primary" type="submit" name="Update Information">
+                            </form>
+
+                            <a href="/"
+                               class="u-active-black u-border-none u-btn u-button-style u-hover-black u-palette-3-base u-text-active-white u-text-black u-text-hover-white u-btn-1">Back
+                                to Home</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+{% endblock %}

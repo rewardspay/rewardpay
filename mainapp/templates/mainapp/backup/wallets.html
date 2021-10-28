@@ -1,0 +1,24 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+{% block title %}Wallets{% endblock %}
+{% block body %}
+ <div class="main">
+  <div class="page-title">
+  <h1 class="logo">Wallets list</h1>
+  <div class="content">
+  {% if wallets %}
+  <ul>
+  {% for wallet in wallets %}
+    <li><a href="/wallet/{{ wallet.wallet_id }}">{{ wallet.name }}</a></li>
+  {% endfor %}
+  </ul>
+  {% else %}
+  <p class="output-txt" style="text-align: center;color: #FFFFFF">There are no wallets.</p>
+  {% endif %}
+  <br>
+  </div>
+  </div>
+     <div class="link-center" style="text-align: center"><a href="/create-wallet/"><h5>Create wallet</h5></a></div>
+ </div>
+
+{% endblock %}

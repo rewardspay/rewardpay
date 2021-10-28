@@ -1,0 +1,55 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+{% block title %}RewardPay accounts{% endblock %}
+{% block body %}
+
+			<section id="two" class="main style2">
+				<div class="container">
+					<div class="row gtr-150">
+						<div class="col-6 col-12-medium">
+							<ul class="major-icons">
+								<li><span class="icon solid style1 major fa-code"></span></li>
+								<li><span class="icon solid style2 major fa-bolt"></span></li>
+								<!--
+                                <li><span class="icon solid style3 major fa-camera-retro"></span></li>
+								<li><span class="icon solid style4 major fa-cog"></span></li>
+								<li><span class="icon solid style5 major fa-desktop"></span></li>
+								<li><span class="icon solid style6 major fa-calendar"></span></li>
+								-->
+							</ul>
+						</div>
+						<div class="col-6 col-12-medium">
+							<header class="major">
+								<h2>RewardPay standalone <br />
+								account list</h2>
+							</header>
+							<p>
+                                {% if accounts %}
+                                  <ul>
+                                  {% for account in accounts %}
+                                    <li><a href="/standalone-account/{{ account.address }}">{{ account.address }}</a> :
+                                        {% if accounts.balance %}
+                                        {{ account.balance }} micro Algos
+                                        {% else %}
+                                        0 micro Algos
+                                        {% endif %}
+                                    </li>
+                                  {% endfor %}
+                                  </ul>
+                                  {% else %}
+                                  There are no standalone accounts.
+                                  {% endif %}
+                            </p>
+							<p></p>
+
+						</div>
+					</div>
+				</div>
+
+                <ul class="actions special">
+				<li><a href="/" class="button wide primary">Back to Home</a></li>
+				<li><a href="/create-standalone/" class="button wide">Create RewardPay standalone account</a></li>
+				</ul>
+			</section>
+
+{% endblock %}
