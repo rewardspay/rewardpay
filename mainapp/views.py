@@ -169,18 +169,6 @@ def register(request):
             user = form.save()
             username = form.cleaned_data.get('username')
 
-            h_addr = add_standalone_account()
-
-            group = Group.objects.get(name='customer')
-            user.groups.add(group)
-
-            Customer.objects.create(
-                user=user,
-                name=user.username,
-                email=user.email,
-                algo_private_key=h_addr[0],
-                algo_addr=h_addr[1],
-            )
 
             messages.success(request, 'Account was created for ' + username)
 

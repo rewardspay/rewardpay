@@ -1,4 +1,0 @@
-py-algorand-sdk>=1.5.0
-Django>=3.2.4
-fontawesomefree>=5.15.4
-Pillow>=8.4.0
