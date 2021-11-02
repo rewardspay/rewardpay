@@ -11,19 +11,20 @@ from django.contrib.auth.models import User
 
 
 class Customer(models.Model):
-	user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
-	name = models.CharField(max_length=200, null=True)
-	home_address = models.CharField(max_length=500, null=True)
-	driver_license: IntegerField = models.IntegerField(max_length=11, null=True, blank=True)
-	algo_private_key = models.CharField(max_length=500, null=True, blank=True)
-	algo_addr = models.CharField(max_length=500, null=True, blank=True)
-	phone = models.CharField(max_length=200, null=True, blank=True)
-	email = models.CharField(max_length=200, null=True)
-	profile_pic = models.ImageField(default="profile1.png", null=True, blank=True)
-	date_created = models.DateTimeField(auto_now_add=True, null=True)
+    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
+    name = models.CharField(max_length=200, null=True)
+    home_address = models.CharField(max_length=500, null=True)
+    driver_license: IntegerField = models.IntegerField(max_length=11, null=True, blank=True)
+    algo_private_key = models.CharField(max_length=500, null=True, blank=True)
+    algo_addr = models.CharField(max_length=500, null=True, blank=True)
+    phone = models.CharField(max_length=200, null=True, blank=True)
+    email = models.CharField(max_length=200, null=True)
+    profile_pic = models.ImageField(default="profile1.png", null=True, blank=True)
+    id_pic = models.ImageField(default='id.png', null=True, blank=True)
+    date_created = models.DateTimeField(auto_now_add=True, null=True)
 
-	def __str__(self):
-		return self.name
+    def __str__(self):
+        return self.name
 
 
 class Netwk_status():

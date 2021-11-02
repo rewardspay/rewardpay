@@ -134,12 +134,12 @@ class SearchTransactionsForm(forms.Form):
         return cleaned_data
 
 class CreateUserForm(UserCreationForm):
-	class Meta:
-		model = User
-		fields = ['username', 'email', 'password1', 'password2']
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password1', 'password2']
 
 class CustomerForm(ModelForm):
-	class Meta:
-		model = Customer
-		fields = '__all__'
-		exclude = ['user','algo_addr']
+    class Meta:
+        model = Customer
+        fields = '__all__'
+        exclude = ['user','algo_addr']

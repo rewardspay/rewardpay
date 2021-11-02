@@ -35,6 +35,8 @@ from .models import Account, Asset, Wallet, WalletAccount, Netwk_status, Custome
 
 from .decorators import unauthenticated_user, allowed_users, admin_only
 
+from .id_check import *
+
 def assets(request):
     """Display all the created assets."""
     assets = Asset.objects.order_by("-created")
@@ -203,6 +205,20 @@ def accountSettings(request):
 
     context = {'form':form}
     return render(request, 'mainapp/account-settings.html', context)
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['customer'])
+def idCheck(request):
+    customer = request.user.customer
+    id_results = id_check()
+    print(id_results)
+
+    context = {'Name' : id_results[0],
+               'Document': id_results[1],
+               'Face_Check': id_results[2],
+               'Confidence': id_results[3],
+               }
+    return render(request, 'mainapp/id_check.html', context)
 
 @login_required(login_url='login')
 def stage1(request):

@@ -1,0 +1,23 @@
+{
+	"details": {
+		"address": {
+			"suburb": "St Johns",
+			"street": "5 Strong Street",
+			"postcode": "1072",
+			"city": "Auckland",
+			"countryCode": "NZ"
+		},
+		"name": {
+			"given": "Arnold",
+			"middle": "",
+			"family": "Schwarzenegger"
+		},
+		"dateofbirth": "1947-07-30",
+		"driverslicence": {
+			"number": "AB123456",
+			"version": "111"
+		}
+	},
+	"reference": "myref1",
+	"consent": "Yes"
+}
