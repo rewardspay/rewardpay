@@ -1,0 +1,6 @@
+Django~=3.2.7
+json2html~=1.3.0
+py-algorand-sdk
+Pillow>=8.4.0
+idanalyzer
+pyteal
