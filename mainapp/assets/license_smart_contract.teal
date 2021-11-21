@@ -1,0 +1,34 @@
+#pragma version 5
+txn ApplicationID
+int 0
+==
+bnz main_l6
+txn OnCompletion
+int OptIn
+==
+bnz main_l5
+txna ApplicationArgs 0
+byte "add_license_global"
+==
+bnz main_l4
+err
+main_l4:
+txn Sender
+byte "admin"
+app_global_get
+==
+assert
+txna ApplicationArgs 1
+txna ApplicationArgs 2
+app_global_put
+int 1
+return
+main_l5:
+int 1
+return
+main_l6:
+byte "admin"
+txn Sender
+app_global_put
+int 1
+return
