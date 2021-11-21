@@ -1,0 +1,36 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+{% block title %}User Profile{% endblock %}
+
+
+{% block extrahead %}
+<link rel="stylesheet" href="{% static 'mainapp/css/smartContract.css' %}" media="screen">
+
+{% endblock %}
+
+{% block body %}
+<body class="u-body">
+
+<section class="u-align-center u-clearfix u-white u-section-1" id="carousel_69ec">
+    <div class="u-clearfix u-sheet u-valign-middle-sm u-sheet-1">
+        <img class="u-image u-image-contain u-image-default u-image-1" alt="" data-image-width="1000"
+             data-image-height="631" src="{% static 'mainapp/images/Untitled-1.png' %}">
+        <h2 class="u-custom-font u-text u-text-default-lg u-text-default-md u-text-default-sm u-text-default-xl u-text-1"
+            data-animation-name="" data-animation-duration="0" data-animation-delay="0" data-animation-direction="">
+            Smart Contract Information</h2>
+
+        <p class="u-large-text u-text u-text-font u-text-variant u-text-2"><b>Smart Contrac ID:</b> {{ Smart_Contract_App_ID }}</p>
+        <p class="u-large-text u-text u-text-font u-text-variant u-text-2">{{ License_ID }}</p>
+        <p class="u-large-text u-text u-text-font u-text-variant u-text-2">{{ License_Details }}</p>
+
+        <a href="/"
+           class="u-active-palette-1-light-2 u-btn u-btn-round u-button-style u-hover-palette-1-light-2 u-palette-3-base u-radius-6 u-text-active-palette-1-base u-text-body-alt-color u-text-hover-palette-1-base u-btn-1"
+           data-animation-name="" data-animation-duration="0" data-animation-delay="0" data-animation-direction="">Home
+            </a>
+    </div>
+</section>
+
+
+
+</body>
+{% endblock %}

@@ -36,6 +36,7 @@ from .models import Account, Asset, Wallet, WalletAccount, Netwk_status, Custome
 from .decorators import unauthenticated_user, allowed_users, admin_only
 
 from .id_check import *
+from .drivers_license_storage import *
 
 def assets(request):
     """Display all the created assets."""
@@ -133,15 +134,6 @@ def create_wallet_account(request, wallet_id):
     messages.add_message(request, messages.SUCCESS, message)
     return redirect("wallet", wallet_id)
 
-def stage1(request):
-    netwk_status = Netwk_status()
-    #netwk_status.stats = json.dumps(network_status(), sort_keys=True, indent=4,)
-    netwk_status.stats = json2html.convert(json=network_status())
-    context = {
-        'Latest network status': netwk_status.stats
-    }
-    return render(request, "mainapp/stage1.html", {'Network': context})
-
 def index(request):
     return render(request, "mainapp/index.html", {})
 
@@ -211,7 +203,7 @@ def accountSettings(request):
 def idCheck(request):
     customer = request.user.customer
     id_results = id_check()
-    print(id_results)
+    #print(id_results)
 
     context = {'Name' : id_results[0],
                'Document': id_results[1],
@@ -221,8 +213,35 @@ def idCheck(request):
     return render(request, 'mainapp/id_check.html', context)
 
 @login_required(login_url='login')
+@allowed_users(allowed_roles=['customer'])
+def smartContract(request):
+    customer = request.user.customer
+    lic_id = "987654321"
+    lic_detail = "Name: Alice Citizen, DoB: 10/03/1975, Expiry Date: 01/12/2023, Address: 120 Spencer St, Melbourne 3000"
+    #print(id_results)
+
+    smartCrt_id = smart_crt(lic_id,lic_detail)
+    smartCrt_output = retrieve_license(smartCrt_id, lic_id)
+
+    print(smartCrt_id)
+    print(smartCrt_output)
+
+    context = {
+                'Smart_Contract_App_ID': smartCrt_id,
+                'License_ID': smartCrt_output[0],
+                'License_Details': smartCrt_output[1],
+               }
+    return render(request, 'mainapp/smartContract.html', context)
+
+@login_required(login_url='login')
 def stage1(request):
-    return render(request, "mainapp/stage1.html", {})
+    #netwk_status = network_status()
+    netwk_status = json2html.convert(json=network_status())
+    #print("test: ", netwk_status)
+    context = {
+        'NetworkStatus': netwk_status
+    }
+    return render(request, "mainapp/stage1.html", context)
 
 @login_required(login_url='login')
 def std_account(request):

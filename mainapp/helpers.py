@@ -235,7 +235,7 @@ def initial_funds_sender():
     """Get the address of initially created account having enough funds.
 
     Such an account is used to transfer initial funds for the accounts
-    created in this tutorial.
+    created.
     """
     return next(
         (
