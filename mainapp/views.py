@@ -147,7 +147,7 @@ def loginUser(request):
 
         if user is not None:
             login(request, user)
-            return redirect('index')
+            return redirect('dashboard')
         else:
             messages.info(request, 'Username OR password is incorrect')
 
@@ -186,6 +186,15 @@ def userPage(request):
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['customer'])
+def dashboard(request):
+# content to show on user page
+    #customer = request.user.customer.get_profile()
+    #context = {'customer':customer}
+
+    return render(request, 'mainapp/dashboard.html', {})
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['customer'])
 def accountSettings(request):
     customer = request.user.customer
     form = CustomerForm(instance=customer)
@@ -204,7 +213,6 @@ def idCheck(request):
     customer = request.user.customer
     id_results = id_check()
     #print(id_results)
-
     context = {'Name' : id_results[0],
                'Document': id_results[1],
                'Face_Check': id_results[2],
@@ -232,6 +240,30 @@ def smartContract(request):
                 'License_Details': smartCrt_output[1],
                }
     return render(request, 'mainapp/smartContract.html', context)
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['customer'])
+def trustScore(request):
+    customer = request.user.customer
+
+    id_results = id_check()
+    tScore = []
+    for n in id_results[3].split():
+        try:
+            tScore.append(float(n))
+        except ValueError:
+            pass
+    #print(tScore)
+    num_tScore = float(tScore[0])
+    customer.trust_score = num_tScore
+    customer.save()
+    #print(customer.trust_score)
+    #tScore = 0.1
+    context = {
+                'TrustScore': num_tScore,
+
+               }
+    return render(request, 'mainapp/trustScore.html', context)
 
 @login_required(login_url='login')
 def stage1(request):

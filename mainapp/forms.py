@@ -142,4 +142,4 @@ class CustomerForm(ModelForm):
     class Meta:
         model = Customer
         fields = '__all__'
-        exclude = ['user','algo_addr']
+        exclude = ['user','algo_addr', 'trust_score','algo_private_key']

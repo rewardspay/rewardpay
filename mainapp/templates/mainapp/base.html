@@ -18,8 +18,15 @@
     <!-- reference to javascript here -->
     <script class="u-script" type="text/javascript" src="{% static 'mainapp/js/jquery.js' %}" defer=""></script>
     <script class="u-script" type="text/javascript" src="{% static 'mainapp/js/nicepage.js' %}" defer=""></script>
-    <!-- reference to google font here -->
 
+    <!-- reference to React script here
+    <script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    -->
+    <script src="{% static 'mainapp/js/myalgo.min.js' %}"></script>
+
+    <!-- reference to google font here -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link id="u-theme-google-font" href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
@@ -29,6 +36,7 @@
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
     <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
     -->
+    <!--
     <script type="application/ld+json">
         {
 		"@context": "http://schema.org",
@@ -37,7 +45,7 @@
 		"logo": "#",
 		"sameAs": []
     }</script>
-
+    -->
     <meta name="theme-color" content="#4861df">
     <meta property="og:title" content="Home">
     <meta property="og:description" content="">
@@ -48,14 +56,57 @@
 
 <!-- *****  Header Navigation Bar  ***** -->
 <header class="u-align-center-sm u-align-center-xs u-clearfix u-header u-header" id="sec-ef8f"><div class="u-clearfix u-sheet u-valign-middle-lg u-valign-middle-md u-valign-middle-sm u-valign-middle-xl u-sheet-1">
+        {% if request.user.is_authenticated %}
+    <div class="button-div" style="text-align: center">
         <a href="/" class="u-image u-logo u-image-1" data-image-width="80" data-image-height="40">
 
           <img src="{% static 'mainapp/images/Rewardpay_logo_sm.png' %}" class="u-logo-image u-logo-image-1" data-image-width="80">
 
         </a>
-        {% if request.user.is_authenticated %}
-        <span class="hello-msg u-text u-text-variant u-text-2">Hello, {{ request.user }}</span>
+
+        Hello, {{ request.user }}
+        <!--    Connect wallet button & script -->
+          <button type="button" id="wallet-btn" name="w-btn">Connect Algo wallet</button>
+          <script type="module">
+              import * as myModule from "{% static 'mainapp/js/myalgo.min.js' %}";
+
+              const myAlgoWallet = new MyAlgoConnect();
+
+              const connectToMyAlgo = async () => {
+                  try {
+                      const accounts = await myAlgoWallet.connect();
+                      console.log(accounts);
+                  } catch (err) {
+                      console.error(err);
+                  }
+              }
+              var btn = document.getElementById("wallet-btn");
+              btn.addEventListener("click", connectToMyAlgo);
+          </script>
+        <style>
+            #wallet-btn {
+                cursor: pointer;
+                outline: none;
+                color: green;
+                background-color: white;
+                border: 1px solid;
+                border-radius: 5px;
+            }
+
+            #wallet-btn:hover {
+                background-color: yellowgreen;
+            }
+
+            #wallet-btn:active {
+                background-color: #3e8e41;
+                box-shadow: 0 0px #666;
+                transform: translateY(4px);
+            }
+        </style>
+
+    </div>
         {% endif %}
+
         <div class="u-social-icons u-spacing-10 u-social-icons-1">
           <a class="u-social-url" title="facebook" target="_blank" href=""><span class="u-icon u-social-facebook u-social-icon u-icon-1"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 112 112" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-9759"></use></svg><svg class="u-svg-content" viewBox="0 0 112 112" x="0" y="0" id="svg-9759"><circle fill="currentColor" cx="56.1" cy="56.1" r="55"></circle><path fill="#FFFFFF" d="M73.5,31.6h-9.1c-1.4,0-3.6,0.8-3.6,3.9v8.5h12.6L72,58.3H60.8v40.8H43.9V58.3h-8V43.9h8v-9.2
             c0-6.7,3.1-17,17-17h12.5v13.9H73.5z"></path></svg></span>
@@ -71,7 +122,9 @@
             C90.6,29.1,82.7,21.3,73.1,21.3z M83,73.3c0,5.5-4.5,9.9-9.9,9.9H38.6c-5.5,0-9.9-4.5-9.9-9.9V38.8c0-5.5,4.5-9.9,9.9-9.9h34.5
             c5.5,0,9.9,4.5,9.9,9.9V73.3z"></path></svg></span>
           </a>
+
         </div>
+        <!-- Nav menu starts here -->
         <nav class="u-align-left u-menu u-menu-dropdown u-offcanvas u-menu-1" data-responsive-from="XL">
           <div class="menu-collapse" style="font-size: 1rem;">
             <a class="u-button-style u-nav-link" href="#">
@@ -90,6 +143,10 @@
                 </li>
                 <li class="u-nav-item"><a class="u-active-grey-5 u-border-active-palette-1-base u-border-hover-palette-1-base u-button-style u-hover-grey-10 u-nav-link u-text-active-grey-90 u-text-grey-90 u-text-hover-grey-90" href="/user/" style="padding: 10px 20px;">User Profile</a>
                 </li>
+                <li class="u-nav-item"><a class="u-active-grey-5 u-border-active-palette-1-base u-border-hover-palette-1-base u-button-style u-hover-grey-10 u-nav-link u-text-active-grey-90 u-text-grey-90 u-text-hover-grey-90" href="/trustScore/" style="padding: 10px 20px;">Check Credit Score</a>
+                </li>
+                <li class="u-nav-item"><a class="u-active-grey-5 u-border-active-palette-1-base u-border-hover-palette-1-base u-button-style u-hover-grey-10 u-nav-link u-text-active-grey-90 u-text-grey-90 u-text-hover-grey-90" href="/dashboard/" style="padding: 10px 20px;">Rental Dashboard</a>
+                </li>
                 <li class="u-nav-item"><a class="u-active-grey-5 u-border-active-palette-1-base u-border-hover-palette-1-base u-button-style u-hover-grey-10 u-nav-link u-text-active-grey-90 u-text-grey-90 u-text-hover-grey-90" href="/" style="padding: 10px 20px;">Home</a>
                 </li>
                 <li class="u-nav-item"><a class="u-button-style u-nav-link" href="/stage1/" style="padding: 10px 20px;">Stage 1</a>
@@ -101,16 +158,22 @@
               <div class="u-inner-container-layout u-sidenav-overflow">
                 <div class="u-menu-close"></div>
                 <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2">
+                {% if not request.user.is_authenticated %}
                 <li class="u-nav-item"><a class="u-button-style u-nav-link" href="/Login/" style="padding: 10px 20px;">Login</a>
                 </li>
                 <li class="u-nav-item"><a class="u-button-style u-nav-link" href="/Register/" style="padding: 10px 20px;">Register</a>
                 </li>
+                {% endif %}
                 <li class="u-nav-item"><a class="u-button-style u-nav-link" href="/" style="padding: 10px 20px;">Home</a>
                 </li>
                 {% if request.user.is_authenticated %}
                 <li class="u-nav-item"><a class="u-button-style u-nav-link" href="/Logout/" style="padding: 10px 20px;">Logout</a>
                 </li>
                 <li class="u-nav-item"><a class="u-button-style u-nav-link" href="/user/" style="padding: 10px 20px;">User Profile</a>
+                </li>
+                <li class="u-nav-item"><a class="u-button-style u-nav-link" href="/dashboard/" style="padding: 10px 20px;">Rental Dashboard</a>
+                </li>
+                <li class="u-nav-item"><a class="u-button-style u-nav-link" href="/trustScore/" style="padding: 10px 20px;">Check Credit Score</a>
                 </li>
                 <li class="u-nav-item"><a class="u-button-style u-nav-link" href="/stage1/" style="padding: 10px 20px;">Stage 1</a>
                 </li>
@@ -121,11 +184,15 @@
             <div class="u-black u-menu-overlay u-opacity u-opacity-70" wfd-invisible="true"></div>
           </div>
         </nav>
-      </div></header>
+      </div>
+
+
+</header>
 <!-- Header End -->
 
 
     {% block body %}
+
 
     {% endblock %}
 
