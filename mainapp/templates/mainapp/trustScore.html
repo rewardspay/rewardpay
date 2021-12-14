@@ -40,7 +40,7 @@
         {% if TrustScore < 0.5 %}
 <!-- List for suggestion to improve Score -->
         <div class="links-unordered">
-            <a class="toggle-button u-active-palette-1-light-2 u-btn u-btn-round u-button-style u-dialog-link u-hover-palette-1-light-2 u-palette-3-base u-radius-6 u-text-active-palette-1-base u-text-body-alt-color u-text-hover-palette-1-base u-btn-1" href="#">SEE HOW TO IMPROVE YOUR SCORE</a>
+            <a class="toggle-button u-active-palette-1-light-2 u-btn u-btn-round u-button-style u-dialog-link u-hover-palette-1-light-2 u-palette-3-base u-radius-6 u-text-active-palette-1-base u-text-body-alt-color u-text-hover-palette-1-base u-btn-1" href="#">HOW TO IMPROVE YOUR SCORE</a>
             <ul style="display:none;">
                 <li class="list-1"><a href="/">Upload a true copy of ID</a></li>
                 <li clsss="list-2"><a href="/">Complete your user profile</a></li>
@@ -103,7 +103,7 @@
                 Your verified personal identity information<br>- Your past payment history on our platform<br>- Third
                 party credit report we have sourced
             </p>
-            <a href="https://#"
+            <a href="/"
                class="u-btn u-btn-round u-button-style u-hover-palette-2-base u-palette-2-base u-radius-50 u-text-body-alt-color u-text-hover-white u-btn-1">Home</a>
             <p class="u-align-center u-text u-text-default u-text-3">&nbsp;I want to learn more about RewardsPay</p>
         </div>
@@ -118,6 +118,7 @@
 </section>
 
 <!-- Pop up CSS style -->
+<!--
 <style>
     .u-section-4 {
         min-height: 973px;
@@ -225,5 +226,113 @@
         }
     }
 </style>
+-->
+<style>
+  .u-section-4 {
+      min-height: 973px;
+  }
+
+  .u-section-4 .u-dialog-1 {
+      width: 983px;
+      min-height: 590px;
+      box-shadow: 2px 2px 8px 0 rgba(128, 128, 128, 1);
+      background-image: linear-gradient(#f2f2f2, #e0e5eb);
+      height: auto;
+      margin: 29px calc(((100% - 1140px) / 2) + 58px) 60px auto;
+  }
+
+  .u-section-4 .u-container-layout-1 {
+      padding: 40px 30px;
+  }
+
+  .u-section-4 .u-icon-1 {
+      height: 64px;
+      width: 64px;
+      margin: 0 auto;
+  }
+
+  .u-section-4 .u-text-1 {
+      font-size: 2.5rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin: 20px auto 0;
+  }
+
+  .u-section-4 .u-text-2 {
+      margin: 20px 0 0;
+  }
+
+  .u-section-4 .u-btn-1 {
+      border-style: none;
+      font-size: 1rem;
+      background-image: none;
+      font-weight: 700;
+      margin: 20px auto 0;
+      padding: 9px 47px 10px 46px;
+  }
+
+  .u-section-4 .u-text-3 {
+      font-size: 0.75rem;
+      margin: 20px auto 0;
+  }
+
+  .u-section-4 .u-icon-2 {
+      width: 15px;
+      height: 15px;
+      left: auto;
+      top: 17px;
+      position: absolute;
+      right: 16px;
+  }
+
+  @media (max-width: 1199px) {
+      .u-section-4 .u-dialog-1 {
+          width: 940px;
+          margin-right: calc(((100% - 940px) / 2));
+      }
+  }
+
+  @media (max-width: 991px) {
+      .u-section-4 .u-dialog-1 {
+          width: 720px;
+          margin-right: calc(((100% - 720px) / 2));
+      }
+
+      .u-section-4 .u-container-layout-1 {
+          padding-top: 30px;
+          padding-bottom: 30px;
+      }
+  }
+
+  @media (max-width: 767px) {
+      .u-section-4 .u-dialog-1 {
+          width: 540px;
+          margin-right: calc(((100% - 540px) / 2));
+      }
+
+      .u-section-4 .u-container-layout-1 {
+          padding-top: 45px;
+      }
+  }
+
+  @media (max-width: 575px) {
+      .u-section-4 .u-dialog-1 {
+          width: 340px;
+          min-height: 404px;
+          margin-right: calc(((100% - 340px) / 2));
+      }
+
+      .u-section-4 .u-container-layout-1 {
+          padding-top: 40px;
+          padding-left: 25px;
+          padding-right: 25px;
+      }
+
+      .u-section-4 .u-text-1 {
+          font-size: 1.875rem;
+          margin-top: 29px;
+      }
+  }</style>
+
 </body>
 {% endblock %}

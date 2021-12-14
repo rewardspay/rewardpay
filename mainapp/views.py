@@ -230,14 +230,16 @@ def smartContract(request):
 
     smartCrt_id = smart_crt(lic_id,lic_detail)
     smartCrt_output = retrieve_license(smartCrt_id, lic_id)
-
+    """
     print(smartCrt_id)
-    print(smartCrt_output)
-
+    print(smartCrt_output)    
+    print(customer.trust_score)
+    """
     context = {
                 'Smart_Contract_App_ID': smartCrt_id,
                 'License_ID': smartCrt_output[0],
                 'License_Details': smartCrt_output[1],
+                'TrustScore': customer.trust_score
                }
     return render(request, 'mainapp/smartContract.html', context)
 
@@ -258,7 +260,8 @@ def trustScore(request):
     customer.trust_score = num_tScore
     customer.save()
     #print(customer.trust_score)
-    #tScore = 0.1
+
+    #num_tScore = 0.1
     context = {
                 'TrustScore': num_tScore,
 

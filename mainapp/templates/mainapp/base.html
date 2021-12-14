@@ -55,18 +55,21 @@
 
 
 <!-- *****  Header Navigation Bar  ***** -->
-<header class="u-align-center-sm u-align-center-xs u-clearfix u-header u-header" id="sec-ef8f"><div class="u-clearfix u-sheet u-valign-middle-lg u-valign-middle-md u-valign-middle-sm u-valign-middle-xl u-sheet-1">
-        {% if request.user.is_authenticated %}
+<header class="u-align-center-sm u-align-center-xs u-clearfix u-header u-header" id="sec-ef8f">
+    <div class="u-clearfix u-sheet u-valign-middle-lg u-valign-middle-md u-valign-middle-sm u-valign-middle-xl u-sheet-1">
+    <a href="/" class="u-image u-logo u-image-1" data-image-width="80" data-image-height="40">
+        <img src="{% static 'mainapp/images/Rewardpay_logo_sm.png' %}" class="u-logo-image u-logo-image-1"
+             data-image-width="80">
+    </a>
+    {% if request.user.is_authenticated %}
+
     <div class="button-div" style="text-align: center">
-        <a href="/" class="u-image u-logo u-image-1" data-image-width="80" data-image-height="40">
 
-          <img src="{% static 'mainapp/images/Rewardpay_logo_sm.png' %}" class="u-logo-image u-logo-image-1" data-image-width="80">
+        <span>Hello, {{ request.user }}
 
-        </a>
-
-        Hello, {{ request.user }}
         <!--    Connect wallet button & script -->
           <button type="button" id="wallet-btn" name="w-btn">Connect Algo wallet</button>
+        </span>
           <script type="module">
               import * as myModule from "{% static 'mainapp/js/myalgo.min.js' %}";
 
@@ -105,6 +108,7 @@
         </style>
 
     </div>
+
         {% endif %}
 
         <div class="u-social-icons u-spacing-10 u-social-icons-1">
