@@ -144,5 +144,5 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.mailgun.org'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'postmaster@chaining.com.au'
-EMAIL_HOST_PASSWORD = 'b913a5c38ece413f76e52ab5899c6b83-2ac825a1-14ac2c79'
+EMAIL_HOST_USER = 'xxx@chaining.com.au'
+EMAIL_HOST_PASSWORD = 'pass'
